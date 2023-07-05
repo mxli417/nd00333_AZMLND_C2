@@ -1,18 +1,64 @@
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
+# Operationalizing machine learning with Azure - train, deploy, consume
 
-
-# Your Project Title Here
-
-*TODO:* Write an overview to your project.
+In the final project of the second part of the course "Machine Learning with Microsoft Azure" 
+we go through a full MLOps workflow, training a model for a bank marketing dataset, deploying
+it into production and of course consuming the endpoint. Additionally, we create and deploy
+a AutoML-backed pipeline and publish it for downstream consumption.
 
 ## Architectural Diagram
-*TODO*: Provide an architectual diagram of the project and give an introduction of each step. An architectural diagram is an image that helps visualize the flow of operations from start to finish. In this case, it has to be related to the completed project, with its various stages that are critical to the overall flow. For example, one stage for managing models could be "using Automated ML to determine the best model". 
+![architectural diagram](./images/aml-diagram.png)
+
+The diagram visualizes the overall MLOps workflow in this
+project:
+
+- we start by ingesting the training data into our workspace
+- using the dataset, we create an AutoML experiment
+that yields various models
+- we pick the best model and deploy it into production
+- thanks to the Azure ML utilities, we can conveniently access the Swagger API - documentation of our endpoint and inspect it locally
+- we can access and consume the endpoint after deployment, using the `endpoint.py` - script
+- optionally, we can also benchmark the endpoint
+- on top of that, we design and create a AML-pipeline
+- we run a AutoML experiment in the pipeline as a pipeline step and select the best model 
+- we publish the pipeline and deploy a REST-endpoint for
+downstream consumption
 
 ## Key Steps
-*TODO*: Write a short discription of the key steps. Remeber to include all the screenshots required to demonstrate key steps. 
+
+The main steps have been outlined above. The following steps detail the workflow from dataset ingestion toward
+model and pipeline deployment.
+
+- Create a dataset asset in Azure ML
+![dataset-creation](./images/dataset_screen.png)
+- Run an AutoML experiment using local files
+![experiment-completion](./images/experiment_complete.png)
+- Select the best model for deployment
+![best-model](./images/best_model.png)
+- Enable application insights
+![app-insights](./images/app-insights-enabled.png)
+- Programmatically get logs from the endpoint
+![](./images/logs-output.png)
+- Check the Swagger UI - API documentation
+![](./images/swagger-ui.png)
+- Benchmark the endpoint with Apache Benchmarking
+![](./images/apache-bm-sc1.png)
+![](./images/apache-bm-sc2.png)
+- Consume the endpoint programmatically
+![](./images/output-from-endpoint.png)
+- Create the pipeline and pipeline jobs
+![](./images/pipelines.png)
+![](./images/pipeline-rest-job.png)
+- Create and run the notebook experiment
+![](./images/nb-pipeline-run-widget.png)
+- Published pipeline overview and pipeline endpoint
+![](./images/published-pipeline-endpoint.png)
+![](./images/pipeline-endpoint.png)
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
+Screencast is online on Youtube: [https://youtu.be/HkqOBA1D9MQ](https://youtu.be/HkqOBA1D9MQ)
 
 ## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+- besides benchmarking for pure response times, 
+it might be interesting to also check for predictions
+of out-of-distribution samples or synthesized samples with extreme values
+- a/b testing between different AutoML models might also be interesting and of great value for practitioners seeking to make the most of the Azure ML automation capabilities
