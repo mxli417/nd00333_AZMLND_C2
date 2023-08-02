@@ -20,6 +20,7 @@ project from data to the final pipeline:
    - we can access and consume the endpoint after deployment, using the `endpoint.py` - script from the local machine (VM)
    - optionally, we can also benchmark the endpoint
    - on top of that, we design and create a AML-pipeline
+5. Pipeline Automation of our workflow:
   - we run a AutoML experiment in the pipeline as a pipeline step and select the best model 
   - we publish the pipeline and deploy a REST-endpoint for downstream consumption using a jupyter notebook
 
